@@ -295,6 +295,12 @@ def generate_timetable(data: dict, seed: Optional[int] = None) -> tuple[list[Ass
     # ──────────────────────────────────────────
     # Phase 3: 일반 과목 배정 (그리디 + 백트래킹)
     # ──────────────────────────────────────────
+    # 많이 배정해야 하는 과목(시수가 큰 과목)부터 우선 배정하도록 정렬 (1일 1교과 병목 방지)
+    from collections import Counter
+    cell_counts = Counter((c["class_name"], c["subject"]) for c in non_block_cells)
+    # 시수가 많은 순서대로 내림차순 정렬
+    non_block_cells.sort(key=lambda c: cell_counts[(c["class_name"], c["subject"])], reverse=True)
+
     success = _greedy_assign(
         non_block_cells,
         assignments,
