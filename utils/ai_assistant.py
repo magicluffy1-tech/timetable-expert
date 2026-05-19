@@ -23,8 +23,8 @@ def diagnose_timetable(data: dict, assignments: list[Assignment], stats: dict) -
     
     try:
         genai.configure(api_key=api_key)
-        # 안전한 최신 모델 사용 권장 (gemini-1.5-flash 또는 gemini-1.5-pro)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # 안전하고 호환성이 높은 모델 사용
+        model = genai.GenerativeModel('gemini-pro')
         
         # 시간표 기초 통계 텍스트 구성
         filled_count = stats.get('total_assigned', len(assignments))
