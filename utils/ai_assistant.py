@@ -23,8 +23,24 @@ def diagnose_timetable(data: dict, assignments: list[Assignment], stats: dict) -
     
     try:
         genai.configure(api_key=api_key)
-        # 안전하고 호환성이 높은 모델 사용
-        model = genai.GenerativeModel('gemini-pro')
+        
+        # API 키에서 접근 가능한 텍스트 생성 모델 목록을 동적으로 가져옵니다.
+        available_models = []
+        for m in genai.list_models():
+            if 'generateContent' in m.supported_generation_methods:
+                available_models.append(m.name.replace("models/", ""))
+        
+        if not available_models:
+            return "⚠️ 현재 API 키로 접근 가능한 텍스트 생성 모델이 없습니다."
+            
+        # 'flash'나 'pro' 가 포함된 모델을 선호
+        selected_model = available_models[0]
+        for name in available_models:
+            if 'flash' in name.lower() or 'pro' in name.lower():
+                selected_model = name
+                break
+
+        model = genai.GenerativeModel(selected_model)
         
         # 시간표 기초 통계 텍스트 구성
         filled_count = stats.get('total_assigned', len(assignments))
