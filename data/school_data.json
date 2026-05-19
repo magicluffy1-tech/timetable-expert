@@ -1,0 +1,1487 @@
+{
+  "school_info": {
+    "name": "서산명지중학교",
+    "semester": "2026-2",
+    "periods_per_day": 7,
+    "days": [
+      "월",
+      "화",
+      "수",
+      "목",
+      "금"
+    ],
+    "periods_per_day_by_day": {
+      "월": 6,
+      "화": 6,
+      "수": 7,
+      "목": 7,
+      "금": 7
+    },
+    "period_times": {
+      "1": {
+        "start": "08:50",
+        "end": "09:35"
+      },
+      "2": {
+        "start": "09:45",
+        "end": "10:30"
+      },
+      "3": {
+        "start": "10:40",
+        "end": "11:25"
+      },
+      "4": {
+        "start": "11:35",
+        "end": "12:20"
+      },
+      "5": {
+        "start": "13:20",
+        "end": "14:05"
+      },
+      "6": {
+        "start": "14:15",
+        "end": "15:00"
+      },
+      "7": {
+        "start": "15:10",
+        "end": "15:55"
+      }
+    }
+  },
+  "grades": {
+    "1학년": {
+      "classes": [
+        "1반"
+      ]
+    },
+    "2학년": {
+      "classes": [
+        "1반"
+      ]
+    },
+    "3학년": {
+      "classes": [
+        "1반"
+      ]
+    }
+  },
+  "teachers": [
+    {
+      "name": "조한울",
+      "subjects": [
+        "과학"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "과학": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "월",
+          "period": 1
+        },
+        {
+          "day": "화",
+          "period": 1
+        },
+        {
+          "day": "수",
+          "period": 1
+        },
+        {
+          "day": "목",
+          "period": 1
+        },
+        {
+          "day": "금",
+          "period": 1
+        }
+      ],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T001"
+    },
+    {
+      "name": "김수학",
+      "subjects": [
+        "수학"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "수학": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "화",
+          "period": 1
+        },
+        {
+          "day": "수",
+          "period": 1
+        },
+        {
+          "day": "목",
+          "period": 1
+        },
+        {
+          "day": "금",
+          "period": 1
+        }
+      ],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T002"
+    },
+    {
+      "name": "변국어",
+      "subjects": [
+        "국어"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "국어": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "금",
+          "period": 5
+        },
+        {
+          "day": "금",
+          "period": 6
+        },
+        {
+          "day": "금",
+          "period": 7
+        }
+      ],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T003"
+    },
+    {
+      "name": "홍체육",
+      "subjects": [
+        "체육",
+        "창체"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "체육": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ],
+        "창체": [
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "수",
+          "period": 6,
+          "subject": "창체"
+        },
+        {
+          "day": "수",
+          "period": 7,
+          "subject": "창체"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T004"
+    },
+    {
+      "name": "김사회",
+      "subjects": [
+        "사회",
+        "역사",
+        "창체"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "사회": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ],
+        "역사": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ],
+        "창체": [
+          "1학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "수",
+          "period": 6,
+          "subject": "창체"
+        },
+        {
+          "day": "수",
+          "period": 7,
+          "subject": "창체"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T005"
+    },
+    {
+      "name": "정영어",
+      "subjects": [
+        "영어"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "영어": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T006"
+    },
+    {
+      "name": "여기가",
+      "subjects": [
+        "기술가정"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "기술가정": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "화",
+          "period": 1
+        },
+        {
+          "day": "수",
+          "period": 1
+        },
+        {
+          "day": "목",
+          "period": 1
+        },
+        {
+          "day": "금",
+          "period": 1
+        }
+      ],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T007"
+    },
+    {
+      "name": "조정보",
+      "subjects": [
+        "정보"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "정보": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": true,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "목",
+          "period": 2,
+          "subject": "정보"
+        },
+        {
+          "day": "목",
+          "period": 3,
+          "subject": "정보"
+        },
+        {
+          "day": "목",
+          "period": 4,
+          "subject": "정보"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T008"
+    },
+    {
+      "name": "임도덕",
+      "subjects": [
+        "도덕"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "도덕": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": true,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "목",
+          "period": 2,
+          "subject": "도덕"
+        },
+        {
+          "day": "목",
+          "period": 4,
+          "subject": "도덕"
+        },
+        {
+          "day": "목",
+          "period": 5,
+          "subject": "도덕"
+        },
+        {
+          "day": "목",
+          "period": 6,
+          "subject": "도덕"
+        },
+        {
+          "day": "목",
+          "period": 7,
+          "subject": "도덕"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T009"
+    },
+    {
+      "name": "곽음악",
+      "subjects": [
+        "음악",
+        "스포츠클럽",
+        "창체"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "음악": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ],
+        "스포츠클럽": [
+          "3학년"
+        ],
+        "창체": [
+          "2학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "목",
+          "period": 1
+        },
+        {
+          "day": "목",
+          "period": 2
+        },
+        {
+          "day": "목",
+          "period": 3
+        },
+        {
+          "day": "목",
+          "period": 4
+        },
+        {
+          "day": "목",
+          "period": 5
+        },
+        {
+          "day": "목",
+          "period": 6
+        },
+        {
+          "day": "목",
+          "period": 7
+        }
+      ],
+      "required_slots": [
+        {
+          "day": "화",
+          "period": 4,
+          "subject": "스포츠클럽"
+        },
+        {
+          "day": "수",
+          "period": 6,
+          "subject": "창체"
+        },
+        {
+          "day": "수",
+          "period": 7,
+          "subject": "창체"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T010"
+    },
+    {
+      "name": "윤미술",
+      "subjects": [
+        "미술"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "미술": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [
+        {
+          "day": "수",
+          "period": 1
+        },
+        {
+          "day": "수",
+          "period": 2
+        },
+        {
+          "day": "수",
+          "period": 3
+        },
+        {
+          "day": "수",
+          "period": 4
+        },
+        {
+          "day": "수",
+          "period": 5
+        },
+        {
+          "day": "수",
+          "period": 6
+        },
+        {
+          "day": "수",
+          "period": 7
+        },
+        {
+          "day": "목",
+          "period": 1
+        },
+        {
+          "day": "목",
+          "period": 2
+        },
+        {
+          "day": "목",
+          "period": 3
+        },
+        {
+          "day": "목",
+          "period": 4
+        },
+        {
+          "day": "목",
+          "period": 5
+        },
+        {
+          "day": "목",
+          "period": 6
+        },
+        {
+          "day": "목",
+          "period": 7
+        },
+        {
+          "day": "금",
+          "period": 7
+        }
+      ],
+      "required_slots": [],
+      "fixed_slots": [],
+      "id": "T011"
+    },
+    {
+      "name": "현진로",
+      "subjects": [
+        "진로"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "진로": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ]
+      },
+      "is_visiting": true,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "목",
+          "period": 2,
+          "subject": "진로"
+        },
+        {
+          "day": "목",
+          "period": 3,
+          "subject": "진로"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T012"
+    },
+    {
+      "name": "안보건",
+      "subjects": [
+        "보건",
+        "스포츠클럽"
+      ],
+      "grades": [
+        "1학년",
+        "2학년",
+        "3학년"
+      ],
+      "subject_grades": {
+        "보건": [
+          "1학년",
+          "2학년",
+          "3학년"
+        ],
+        "스포츠클럽": [
+          "1학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "화",
+          "period": 3,
+          "subject": "스포츠클럽"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T013"
+    },
+    {
+      "name": "김상담",
+      "subjects": [
+        "스포츠클럽"
+      ],
+      "grades": [
+        "2학년"
+      ],
+      "subject_grades": {
+        "스포츠클럽": [
+          "2학년"
+        ]
+      },
+      "is_visiting": false,
+      "blocked_slots": [],
+      "required_slots": [
+        {
+          "day": "화",
+          "period": 2,
+          "subject": "스포츠클럽"
+        }
+      ],
+      "fixed_slots": [],
+      "id": "T014"
+    }
+  ],
+  "curriculum": {
+    "1학년": {
+      "국어": 5,
+      "수학": 4,
+      "영어": 3,
+      "사회": 3,
+      "역사": 0,
+      "과학": 3,
+      "기술가정": 2,
+      "체육": 3,
+      "미술": 1,
+      "음악": 2,
+      "보건": 0,
+      "도덕": 2,
+      "진로": 1,
+      "정보": 1,
+      "창체": 2,
+      "스포츠클럽": 1
+    },
+    "2학년": {
+      "국어": 4,
+      "수학": 4,
+      "영어": 3,
+      "사회": 0,
+      "역사": 3,
+      "과학": 4,
+      "기술가정": 3,
+      "체육": 3,
+      "미술": 1,
+      "음악": 1,
+      "보건": 1,
+      "도덕": 2,
+      "진로": 1,
+      "정보": 1,
+      "창체": 2,
+      "스포츠클럽": 1
+    },
+    "3학년": {
+      "국어": 4,
+      "수학": 3,
+      "영어": 4,
+      "사회": 2,
+      "역사": 2,
+      "과학": 4,
+      "기술가정": 3,
+      "체육": 3,
+      "미술": 2,
+      "음악": 1,
+      "보건": 1,
+      "도덕": 1,
+      "진로": 0,
+      "정보": 0,
+      "창체": 2,
+      "스포츠클럽": 1
+    }
+  },
+  "special_rooms": [
+    {
+      "id": "SR001",
+      "name": "과학실",
+      "subjects": [
+        "과학"
+      ]
+    },
+    {
+      "id": "SR002",
+      "name": "기술실",
+      "subjects": [
+        "기술가정"
+      ]
+    },
+    {
+      "id": "SR003",
+      "name": "음악실",
+      "subjects": [
+        "음악"
+      ]
+    },
+    {
+      "id": "SR004",
+      "name": "미술실",
+      "subjects": [
+        "미술"
+      ]
+    },
+    {
+      "id": "SR005",
+      "name": "체육관",
+      "subjects": [
+        "체육"
+      ]
+    },
+    {
+      "id": "SR006",
+      "name": "영어실",
+      "subjects": [
+        "영어"
+      ]
+    }
+  ],
+  "block_times": [
+    {
+      "class_name": "1학년",
+      "subject": "도덕",
+      "n_consecutive": 2
+    },
+    {
+      "class_name": "2학년",
+      "subject": "도덕",
+      "n_consecutive": 2
+    },
+    {
+      "class_name": "3학년",
+      "subject": "도덕",
+      "n_consecutive": 2
+    },
+    {
+      "class_name": "1학년",
+      "subject": "창체",
+      "n_consecutive": 2
+    },
+    {
+      "class_name": "2학년",
+      "subject": "창체",
+      "n_consecutive": 2
+    },
+    {
+      "class_name": "3학년",
+      "subject": "창체",
+      "n_consecutive": 2
+    }
+  ],
+  "free_semester": {
+    "enabled": false,
+    "target_grade": "1학년",
+    "programs": []
+  },
+  "timetable": {
+    "1학년 1반": {
+      "화": {
+        "2": {
+          "subject": "스포츠클럽",
+          "teacher_id": "T013",
+          "special_room": "",
+          "is_block": false
+        },
+        "5": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "6": {
+          "subject": "음악",
+          "teacher_id": "T010",
+          "special_room": "음악실",
+          "is_block": false
+        },
+        "1": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "3": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "사회",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "수": {
+        "6": {
+          "subject": "창체",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        },
+        "7": {
+          "subject": "창체",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "1": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "5": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "2": {
+          "subject": "사회",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "목": {
+        "2": {
+          "subject": "정보",
+          "teacher_id": "T008",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "도덕",
+          "teacher_id": "T009",
+          "special_room": "",
+          "is_block": false
+        },
+        "5": {
+          "subject": "도덕",
+          "teacher_id": "T009",
+          "special_room": "",
+          "is_block": false
+        },
+        "3": {
+          "subject": "진로",
+          "teacher_id": "T012",
+          "special_room": "",
+          "is_block": false
+        },
+        "7": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "6": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "1": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "금": {
+        "7": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "4": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "1": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "3": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "6": {
+          "subject": "사회",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "월": {
+        "5": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "6": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "4": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "3": {
+          "subject": "미술",
+          "teacher_id": "T011",
+          "special_room": "미술실",
+          "is_block": false
+        },
+        "1": {
+          "subject": "음악",
+          "teacher_id": "T010",
+          "special_room": "음악실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        }
+      }
+    },
+    "2학년 1반": {
+      "화": {
+        "3": {
+          "subject": "스포츠클럽",
+          "teacher_id": "T014",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "6": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "5": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "역사",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "목": {
+        "3": {
+          "subject": "정보",
+          "teacher_id": "T008",
+          "special_room": "",
+          "is_block": false
+        },
+        "2": {
+          "subject": "도덕",
+          "teacher_id": "T009",
+          "special_room": "",
+          "is_block": false
+        },
+        "6": {
+          "subject": "도덕",
+          "teacher_id": "T009",
+          "special_room": "",
+          "is_block": false
+        },
+        "5": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "7": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "4": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "역사",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "수": {
+        "6": {
+          "subject": "창체",
+          "teacher_id": "T010",
+          "special_room": "",
+          "is_block": false
+        },
+        "7": {
+          "subject": "창체",
+          "teacher_id": "T010",
+          "special_room": "",
+          "is_block": false
+        },
+        "3": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "4": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "2": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "보건",
+          "teacher_id": "T013",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "금": {
+        "2": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "7": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "4": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "6": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "역사",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "월": {
+        "4": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "1": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "6": {
+          "subject": "미술",
+          "teacher_id": "T011",
+          "special_room": "미술실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "음악",
+          "teacher_id": "T010",
+          "special_room": "음악실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        }
+      }
+    },
+    "3학년 1반": {
+      "화": {
+        "4": {
+          "subject": "스포츠클럽",
+          "teacher_id": "T010",
+          "special_room": "",
+          "is_block": false
+        },
+        "6": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "1": {
+          "subject": "미술",
+          "teacher_id": "T011",
+          "special_room": "미술실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "수": {
+        "6": {
+          "subject": "창체",
+          "teacher_id": "T004",
+          "special_room": "",
+          "is_block": false
+        },
+        "7": {
+          "subject": "창체",
+          "teacher_id": "T004",
+          "special_room": "",
+          "is_block": false
+        },
+        "2": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "4": {
+          "subject": "음악",
+          "teacher_id": "T010",
+          "special_room": "음악실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "사회",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "목": {
+        "7": {
+          "subject": "도덕",
+          "teacher_id": "T009",
+          "special_room": "",
+          "is_block": false
+        },
+        "6": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "금": {
+        "3": {
+          "subject": "영어",
+          "teacher_id": "T006",
+          "special_room": "영어실",
+          "is_block": false
+        },
+        "4": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "2": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "6": {
+          "subject": "미술",
+          "teacher_id": "T011",
+          "special_room": "미술실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "수학",
+          "teacher_id": "T002",
+          "special_room": "",
+          "is_block": false
+        },
+        "7": {
+          "subject": "역사",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "보건",
+          "teacher_id": "T013",
+          "special_room": "",
+          "is_block": false
+        }
+      },
+      "월": {
+        "2": {
+          "subject": "과학",
+          "teacher_id": "T001",
+          "special_room": "과학실",
+          "is_block": false
+        },
+        "5": {
+          "subject": "기술가정",
+          "teacher_id": "T007",
+          "special_room": "기술실",
+          "is_block": false
+        },
+        "3": {
+          "subject": "체육",
+          "teacher_id": "T004",
+          "special_room": "체육관",
+          "is_block": false
+        },
+        "6": {
+          "subject": "국어",
+          "teacher_id": "T003",
+          "special_room": "",
+          "is_block": false
+        },
+        "1": {
+          "subject": "사회",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        },
+        "4": {
+          "subject": "역사",
+          "teacher_id": "T005",
+          "special_room": "",
+          "is_block": false
+        }
+      }
+    }
+  },
+  "substitutions": [
+    {
+      "date": "2026-05-19",
+      "day": "월",
+      "period": 4,
+      "class_name": "2학년 1반",
+      "subject": "영어",
+      "grade": "2학년",
+      "absent_teacher_id": "T001",
+      "absent_teacher_name": "조한울",
+      "reason": "출장",
+      "status": "done",
+      "sub_teacher_id": "T002",
+      "sub_teacher_name": "김수학",
+      "id": "SUB0001",
+      "created_at": "2026-05-19T11:25:02.337298"
+    },
+    {
+      "date": "2026-05-19",
+      "day": "월",
+      "period": 1,
+      "class_name": "1학년 1반",
+      "subject": "음악",
+      "grade": "1학년",
+      "absent_teacher_id": "T001",
+      "absent_teacher_name": "조한울",
+      "reason": "출장",
+      "status": "done",
+      "sub_teacher_id": "T003",
+      "sub_teacher_name": "변국어",
+      "id": "SUB0002",
+      "created_at": "2026-05-19T11:25:41.987519"
+    }
+  ],
+  "fixed_subject_slots": [
+    {
+      "class_name": "1학년 1반",
+      "day": "화",
+      "period": 2,
+      "subject": "스포츠클럽"
+    },
+    {
+      "class_name": "2학년 1반",
+      "day": "화",
+      "period": 3,
+      "subject": "스포츠클럽"
+    },
+    {
+      "class_name": "3학년 1반",
+      "day": "화",
+      "period": 4,
+      "subject": "스포츠클럽"
+    }
+  ],
+  "google_sheet_url": "https://docs.google.com/spreadsheets/d/1RcXGreCPIlrmGW5tVvovwccW-pEqls7p_iFxmOxdgc0/edit?gid=0#gid=0"
+}
