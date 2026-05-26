@@ -68,6 +68,12 @@ DEFAULT_DATA = {
     "timetable": {},
     "substitutions": [],
     "fixed_subject_slots": [],
+    "academic_calendar": {
+        "start_date": "2025-03-02",
+        "end_date":   "2025-07-18",
+        "std_weeks":  17,
+        "exceptions": [],
+    },
 }
 
 SUBJECT_COLORS = {
