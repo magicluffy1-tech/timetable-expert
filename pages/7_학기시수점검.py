@@ -146,6 +146,41 @@ with tab1:
         "요일 시간표를 다른 요일로 운영하는 날(예: 목요일에 금요일 시간표 운영)을 추가하세요."
     )
 
+    # 🇰🇷 법정 공휴일 자동 불러오기
+    if st.button("🇰🇷 우리나라 법정 공휴일 자동 불러오기 (학기 기간 반영)", key="load_kr_holidays", use_container_width=True):
+        try:
+            import holidays
+            start_yr = new_start.year
+            end_yr = new_end.year
+            years = list(range(start_yr, end_yr + 1))
+            kr_holidays = holidays.KR(years=years)
+            
+            added_count = 0
+            existing_dates = {exc["date"] for exc in cal["exceptions"]}
+            
+            temp_exceptions = cal["exceptions"].copy()
+            
+            for h_date, h_name in sorted(kr_holidays.items()):
+                if new_start <= h_date <= new_end:
+                    date_str = h_date.isoformat()
+                    if date_str not in existing_dates:
+                        temp_exceptions.append({
+                            "date": date_str,
+                            "type": "holiday",
+                            "memo": h_name,
+                            "replace_with": "",
+                        })
+                        added_count += 1
+            
+            if added_count > 0:
+                st.session_state.academic_calendar["exceptions"] = temp_exceptions
+                st.success(f"✅ 총 {added_count}개의 법정 공휴일을 추가했습니다! 아래 '💾 학사 일정 저장' 버튼을 누르면 최종 저장됩니다.")
+                st.rerun()
+            else:
+                st.info("ℹ️ 학기 기간 내에 새로 추가할 법정 공휴일이 없거나 이미 모두 등록되어 있습니다.")
+        except Exception as e:
+            st.error(f"❌ 공휴일을 불러오는 중 오류가 발생했습니다: {e}")
+
     exc_cols = st.columns([2, 2, 2, 2, 1])
     exc_cols[0].markdown("**날짜**")
     exc_cols[1].markdown("**유형**")
@@ -274,6 +309,7 @@ def _compute_subject_hours(
     days_order: list,
     past_counts: dict,
     future_counts: dict,
+    curriculum: dict,
 ) -> dict:
     """
     특정 학급의 교과별 (완료 예상 시수, 잔여 예상 시수) 계산.
@@ -282,6 +318,12 @@ def _compute_subject_hours(
     cls_tt = timetable.get(class_name, {})
     result = {}
 
+    # 학급의 학년에 해당하는 교육과정 과목들로 초기화하여 누락 방지 (평균 계산 오류 수정)
+    grade_key = class_name.split()[0] if class_name else ""
+    grade_curr = curriculum.get(grade_key, {})
+    for subj in grade_curr:
+        result[subj] = {"done": 0, "remaining": 0, "total": 0}
+
     for day in days_order:
         day_tt = cls_tt.get(day, {})
         for period_str, cell in day_tt.items():
@@ -289,7 +331,7 @@ def _compute_subject_hours(
             if not subj:
                 continue
             if subj not in result:
-                result[subj] = {"done": 0, "remaining": 0}
+                result[subj] = {"done": 0, "remaining": 0, "total": 0}
             result[subj]["done"]      += past_counts.get(day, 0)
             result[subj]["remaining"] += future_counts.get(day, 0)
 
@@ -445,7 +487,7 @@ with tab3:
 
     for cls in target_classes:
         cls_hours = _compute_subject_hours(
-            timetable, cls, days_order, past_counts, future_counts
+            timetable, cls, days_order, past_counts, future_counts, curriculum
         )
         for subj, hrs in cls_hours.items():
             if subj not in agg:
