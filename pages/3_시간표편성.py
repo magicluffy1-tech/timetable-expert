@@ -427,33 +427,33 @@ with tab3:
                 st.success("수정 사항이 저장되었습니다!")
                 st.rerun()
         else:
-            st.caption("선택한 과목을 이 시간에 고정하고, 나머지 과목들은 충돌이 없도록 알아서 빈칸으로 연쇄 이동하여 재배정합니다.")
+            st.caption(
+                "선택한 과목을 이 시간에 배정하고, 충돌이 발생하면 **기존 수업을 빈 슬롯으로 국소적으로 이동**합니다. "
+                "다른 학급이나 교사의 시간표는 건드리지 않아 '나비효과'를 방지합니다."
+            )
             if st.button("🚀 스마트 재배정 실행", key="save_smart_edit", type="primary"):
                 if new_subj == "(비우기)":
                     st.error("스마트 재배정은 빈칸(비우기)으로는 실행할 수 없습니다.")
                 elif not new_tid:
                     st.error("담당 교사가 배정되지 않아 스마트 재배정을 실행할 수 없습니다.")
                 else:
-                    with st.spinner("해당 수업을 고정하고 나머지 시간표를 재조정 중입니다..."):
-                        # 1) fixed_subject_slots 에 추가
-                        fixed_slots = data.get("fixed_subject_slots", [])
-                        # 동일 학급/요일/교시에 다른 고정이 있으면 제거
-                        fixed_slots = [fs for fs in fixed_slots if not (fs.get("class_name") == edit_class and fs.get("day") == edit_day and fs.get("period") == str(edit_period))]
-                        fixed_slots.append({
-                            "class_name": edit_class,
-                            "day": edit_day,
-                            "period": str(edit_period),
-                            "subject": new_subj,
-                            "teacher_id": new_tid
-                        })
-                        data["fixed_subject_slots"] = fixed_slots
-                        
-                        # 2) 시간표 1개 재생성 (generate_timetable)
-                        from utils.scheduler import generate_timetable, assignments_to_timetable_dict
-                        assignments, stats = generate_timetable(data, seed=None)
-                        
-                        # 3) 결과 반영
-                        data["timetable"] = assignments_to_timetable_dict(assignments, data)
+                    with st.spinner("Local Swap 알고리즘으로 최소 범위 재조정 중..."):
+                        from utils.local_swap import local_swap_reschedule
+                        timetable = data.get("timetable", {})
+                        ok, msg, new_tt = local_swap_reschedule(
+                            timetable=timetable,
+                            data=data,
+                            class_name=edit_class,
+                            target_day=edit_day,
+                            target_period=edit_period,
+                            new_subject=new_subj,
+                            new_teacher_id=new_tid,
+                        )
+                    if ok:
+                        data["timetable"] = new_tt
                         save_session_data()
-                    st.success("스마트 연쇄 재배정이 완료되었습니다! '시간표 보기' 탭에서 확인하세요.")
-                    st.rerun()
+                        st.success(msg)
+                        st.rerun()
+                    else:
+                        st.error(msg)
+

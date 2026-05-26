@@ -288,7 +288,7 @@ def set_timetable_cell(data: dict, class_name: str, day: str, period: int, cell:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 구글 시트 연동 기능 추가
+# 구글 시트 연동 기능
 # ──────────────────────────────────────────────────────────────────────────────
 import re
 import urllib.parse
@@ -303,39 +303,133 @@ def extract_google_sheet_id(url: str) -> str | None:
 
 
 def fetch_google_sheet_tab(doc_id: str, tab_name: str) -> pd.DataFrame:
-    """구글 시트의 특정 탭 데이터를 CSV 형태로 패치하여 DataFrame으로 변환"""
+    """
+    [공개 시트용] 구글 시트의 특정 탭 데이터를 CSV로 다운로드하여 DataFrame으로 반환.
+    시트의 공유 설정이 '링크가 있는 모든 사용자 - 뷰어'여야 합니다.
+    """
     encoded_tab = urllib.parse.quote(tab_name)
-    export_url = f"https://docs.google.com/spreadsheets/d/{doc_id}/gviz/tq?tqx=out:csv&sheet={encoded_tab}"
-    
+    export_url = (
+        f"https://docs.google.com/spreadsheets/d/{doc_id}"
+        f"/gviz/tq?tqx=out:csv&sheet={encoded_tab}"
+    )
     try:
         req = urllib.request.Request(export_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=15) as response:
+            # HTTP 403/401은 시트가 비공개임을 의미
+            if response.status == 403:
+                raise PermissionError(
+                    "접근 거부(403): 시트가 비공개 상태입니다. "
+                    "공유 설정을 '뷰어'로 변경하거나 서비스 계정 JSON 키를 사용하세요."
+                )
             csv_data = response.read()
-            
-        try:
-            decoded_csv = csv_data.decode('utf-8')
-        except UnicodeDecodeError:
-            decoded_csv = csv_data.decode('cp949')
-            
-        df = pd.read_csv(io.StringIO(decoded_csv))
-        # 열 이름 정리
-        df.columns = df.columns.str.strip().str.replace('\n', '', regex=False).str.replace('\r', '', regex=False)
-        return df
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            raise PermissionError(
+                "접근 거부(403): 시트가 비공개 상태입니다. "
+                "공유 설정을 '뷰어'로 변경하거나 서비스 계정 JSON 키를 사용하세요."
+            )
+        raise Exception(f"'{tab_name}' 탭을 가져오지 못했습니다: HTTP {e.code} - {e.reason}")
     except Exception as e:
         raise Exception(f"'{tab_name}' 탭을 가져오지 못했습니다: {e}")
 
+    try:
+        decoded_csv = csv_data.decode('utf-8')
+    except UnicodeDecodeError:
+        decoded_csv = csv_data.decode('cp949')
 
-def sync_all_from_google_sheet(data: dict, url: str) -> tuple[bool, list[str]]:
-    """구글 시트 URL을 파싱하여 전체 기초 데이터를 동기화"""
+    df = pd.read_csv(io.StringIO(decoded_csv))
+    df.columns = (
+        df.columns.str.strip()
+        .str.replace('\n', '', regex=False)
+        .str.replace('\r', '', regex=False)
+    )
+    return df
+
+
+def fetch_google_sheet_tab_sa(
+    spreadsheet_id: str, tab_name: str, service_account_info: dict
+) -> pd.DataFrame:
+    """
+    [비공개 시트용 - Service Account OAuth 2.0]
+    서비스 계정 JSON 키를 이용해 비공개 구글 시트에 접근합니다.
+
+    사전 준비:
+      1) Google Cloud Console에서 서비스 계정을 생성합니다.
+      2) 해당 서비스 계정의 이메일을 구글 시트에 '편집자' 또는 '뷰어'로 공유합니다.
+      3) 서비스 계정 JSON 키 파일 내용을 그대로 붙여넣으면 됩니다.
+
+    Parameters
+    ----------
+    spreadsheet_id    : 구글 시트 Document ID (URL에서 추출)
+    tab_name          : 탭(시트) 이름
+    service_account_info : 서비스 계정 JSON 키 딕셔너리
+    """
+    try:
+        import google.oauth2.service_account as sa_module
+        import googleapiclient.discovery as discovery
+    except ImportError:
+        raise ImportError(
+            "비공개 시트 접근에는 추가 패키지가 필요합니다.\n"
+            "pip install google-auth google-api-python-client 을 실행하세요."
+        )
+
+    SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    credentials = sa_module.Credentials.from_service_account_info(
+        service_account_info, scopes=SCOPES
+    )
+    service = discovery.build("sheets", "v4", credentials=credentials, cache_discovery=False)
+
+    # 탭 이름으로 범위 지정 (첫 행 = 헤더, 나머지 = 데이터)
+    range_name = f"'{tab_name}'"
+    result = (
+        service.spreadsheets()
+        .values()
+        .get(spreadsheetId=spreadsheet_id, range=range_name)
+        .execute()
+    )
+    rows = result.get("values", [])
+    if not rows:
+        return pd.DataFrame()
+
+    headers = [str(h).strip() for h in rows[0]]
+    data_rows = rows[1:]
+    # 행마다 열 수가 다를 수 있으므로 맞춰줌
+    padded = [row + [""] * (len(headers) - len(row)) for row in data_rows]
+    df = pd.DataFrame(padded, columns=headers)
+    return df
+
+
+def sync_all_from_google_sheet(
+    data: dict,
+    url: str,
+    service_account_info: dict | None = None,
+) -> tuple[bool, list[str]]:
+    """
+    구글 시트 URL을 파싱하여 전체 기초 데이터를 동기화.
+
+    Parameters
+    ----------
+    data                : 현재 학교 데이터 딕셔너리 (인플레이스 수정됨)
+    url                 : 구글 시트 공유 URL
+    service_account_info: (선택) 서비스 계정 JSON 딕셔너리.
+                          None이면 공개 URL 방식을 사용.
+                          지정하면 비공개 시트도 안전하게 접근 가능.
+    """
     doc_id = extract_google_sheet_id(url)
     if not doc_id:
         return False, ["올바른 구글 시트 URL이 아닙니다."]
-        
+
+    # 접근 방식 선택 (공개 URL vs Service Account)
+    def _fetch(tab_name: str) -> "pd.DataFrame":
+        if service_account_info:
+            return fetch_google_sheet_tab_sa(doc_id, tab_name, service_account_info)
+        return fetch_google_sheet_tab(doc_id, tab_name)
+
     logs = []
-    
+
     # 1. 교과시수 동기화
     try:
-        df_curr = fetch_google_sheet_tab(doc_id, "교과시수")
+        df_curr = _fetch("교과시수")
         required_cols = ["학년", "과목", "주간시수"]
         if all(col in df_curr.columns for col in required_cols):
             # curriculum 데이터 구성
@@ -457,7 +551,7 @@ def sync_all_from_google_sheet(data: dict, url: str) -> tuple[bool, list[str]]:
 
     # 3. 블록타임 동기화
     try:
-        df_blocks = fetch_google_sheet_tab(doc_id, "블록타임")
+        df_blocks = _fetch("블록타임")
         required_cols = ["학급", "과목", "연속교시"]
         if all(col in df_blocks.columns for col in required_cols):
             new_blocks = []
@@ -484,7 +578,7 @@ def sync_all_from_google_sheet(data: dict, url: str) -> tuple[bool, list[str]]:
 
     # 4. 순회교사 고정시간 동기화
     try:
-        df_fixed = fetch_google_sheet_tab(doc_id, "순회교사고정")
+        df_fixed = _fetch("순회교사고정")
         required_cols = ["교사명", "요일", "교시", "학급", "과목"]
         if all(col in df_fixed.columns for col in required_cols):
             fixed_count = 0
@@ -529,7 +623,7 @@ def sync_all_from_google_sheet(data: dict, url: str) -> tuple[bool, list[str]]:
 
     # 5. 시간고정배정 동기화
     try:
-        df_fixed_subj = fetch_google_sheet_tab(doc_id, "시간고정배정")
+        df_fixed_subj = _fetch("시간고정배정")
         required_cols = ["학급명", "요일", "교시", "과목명"]
         if all(col in df_fixed_subj.columns for col in required_cols):
             new_fixed_subj = []
