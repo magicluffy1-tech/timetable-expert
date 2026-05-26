@@ -526,21 +526,23 @@ with tab3:
     st.markdown('<div class="section-title">📋 교과별 시수 현황표</div>', unsafe_allow_html=True)
 
     label_suffix = f" ({view_mode})" if view_mode == "학년별(전체 평균)" else ""
-    html = f"""
-    <table class="hours-table">
-      <thead>
-        <tr>
-          <th>교과</th>
-          <th>주당시수</th>
-          <th>기준시수<br>({std_weeks_used}주)</th>
-          <th>✅ 완료시수<br>(기준일까지)</th>
-          <th>⏳ 잔여예상시수<br>(기준일 이후)</th>
-          <th>📊 최종예상시수</th>
-          <th>🔺 과부족 시수{label_suffix}</th>
-        </tr>
-      </thead>
-      <tbody>
-    """
+    
+    # Markdown의 들여쓰기 코드블록 파싱 오작동을 완벽히 차단하기 위해 모든 들여쓰기를 제거한 리스트로 구성하여 조인합니다.
+    html_lines = []
+    html_lines.append('<table class="hours-table">')
+    html_lines.append('<thead>')
+    html_lines.append('<tr>')
+    html_lines.append('<th>교과</th>')
+    html_lines.append('<th>주당시수</th>')
+    html_lines.append(f'<th>기준시수<br>({std_weeks_used}주)</th>')
+    html_lines.append('<th>✅ 완료시수<br>(기준일까지)</th>')
+    html_lines.append('<th>⏳ 잔여예상시수<br>(기준일 이후)</th>')
+    html_lines.append('<th>📊 최종예상시수</th>')
+    html_lines.append(f'<th>🔺 과부족 시수{label_suffix}</th>')
+    html_lines.append('</tr>')
+    html_lines.append('</thead>')
+    html_lines.append('<tbody>')
+
     for row in rows:
         sh = row["shortage"]
         if sh < -0.4:
@@ -554,20 +556,20 @@ with tab3:
             sh_str = "✔ 충족"
 
         subj_color = SUBJECT_COLORS.get(row["subject"], "#cccccc")
-        html += f"""
-        <tr>
-          <td><span style="display:inline-block;width:10px;height:10px;
-              border-radius:50%;background:{subj_color};margin-right:6px;"></span>
-              {row["subject"]}</td>
-          <td>{row["weekly"]}h/주</td>
-          <td><strong>{row["std_total"]}h</strong></td>
-          <td>{row["done"]:.1f}h</td>
-          <td>{row["remaining"]:.1f}h</td>
-          <td><strong>{row["expected_total"]:.1f}h</strong></td>
-          <td class="{cell_cls}"><strong>{sh_str}</strong></td>
-        </tr>
-        """
-    html += "</tbody></table>"
+        html_lines.append('<tr>')
+        html_lines.append(f'<td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:{subj_color};margin-right:6px;"></span>{row["subject"]}</td>')
+        html_lines.append(f'<td>{row["weekly"]}h/주</td>')
+        html_lines.append(f'<td><strong>{row["std_total"]}h</strong></td>')
+        html_lines.append(f'<td>{row["done"]:.1f}h</td>')
+        html_lines.append(f'<td>{row["remaining"]:.1f}h</td>')
+        html_lines.append(f'<td><strong>{row["expected_total"]:.1f}h</strong></td>')
+        html_lines.append(f'<td class="{cell_cls}"><strong>{sh_str}</strong></td>')
+        html_lines.append('</tr>')
+
+    html_lines.append('</tbody>')
+    html_lines.append('</table>')
+
+    html = "".join(html_lines)
     st.markdown(html, unsafe_allow_html=True)
 
     # ─── 요약 배너 ────────────────────────────────────────────────────
