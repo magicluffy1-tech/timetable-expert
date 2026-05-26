@@ -188,11 +188,12 @@ with tab1:
     exc_cols[3].markdown("**대체 요일** (요일변경 시)")
     exc_cols[4].markdown("")
 
-    exceptions = cal["exceptions"].copy()
+    # 기존 예외 목록 표시 및 수정사항 st.session_state와 즉각 동기화
+    exceptions = st.session_state.academic_calendar["exceptions"]
 
-    # 기존 예외 목록 표시
     to_delete = []
-    for i, exc in enumerate(exceptions):
+    for i in range(len(exceptions)):
+        exc = exceptions[i]
         ec1, ec2, ec3, ec4, ec5 = st.columns([2, 2, 2, 2, 1])
         exc_date = ec1.date_input(
             f"날짜_{i}", value=date.fromisoformat(exc["date"]),
@@ -216,6 +217,7 @@ with tab1:
                    if exc.get("replace_with", "(없음)") in ["(없음)", "월", "화", "수", "목", "금"] else 0),
             key=f"exc_replace_{i}", label_visibility="collapsed",
         )
+        
         if ec5.button("🗑", key=f"del_exc_{i}"):
             to_delete.append(i)
         else:
@@ -226,11 +228,14 @@ with tab1:
                 "replace_with": exc_replace if exc_replace != "(없음)" else "",
             }
 
-    for idx in sorted(to_delete, reverse=True):
-        exceptions.pop(idx)
+    if to_delete:
+        for idx in sorted(to_delete, reverse=True):
+            exceptions.pop(idx)
+        st.session_state.academic_calendar["exceptions"] = exceptions
+        st.rerun()
 
     if st.button("➕ 예외 일정 추가", key="add_exc"):
-        exceptions.append({
+        st.session_state.academic_calendar["exceptions"].append({
             "date": date.today().isoformat(),
             "type": "holiday",
             "memo": "",
